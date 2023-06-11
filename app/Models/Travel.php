@@ -26,6 +26,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Tour> $tours
  * @property-read int|null $tours_count
+ * @property-read int $number_of_nights
  * @method static Builder|Travel findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static Builder|Travel newModelQuery()
  * @method static Builder|Travel newQuery()
