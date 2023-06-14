@@ -8,11 +8,25 @@ use Tests\TestCase;
 
 class ToursListTest extends TestCase
 {
+    public function test_tours_list_by_travel_slug_returns_correct_tours(): void
+    {
+        /** @var Travel $travel */
+        $travel = Travel::factory()->create();
+        /** @var Tour $tour */
+        $tour = Tour::factory()->create(['travel_id' => $travel->id]);
+
+        $response = $this->get('/api/v1/travels/' . $travel->slug . '/tours');
+
+        $response->assertStatus(200);
+        $response->assertJsonCount(1, 'data');
+        $response->assertJsonFragment(['id' => $tour->id]);
+    }
+
     public function test_tour_price_is_shown_correctly(): void
     {
         /** @var Travel $travel */
         $travel = Travel::factory()->create();
-        $tourPrice = $this->faker->randomFloat(2, 10, 999);
+        $tourPrice = number_format($this->faker->randomFloat(2, 10, 999), 2);
         Tour::factory()->create([
             'travel_id' => $travel->id,
             'price' => $tourPrice,
@@ -22,7 +36,7 @@ class ToursListTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonCount(1, 'data');
-        $response->assertJsonFragment(['price' => (string)$tourPrice]);
+        $response->assertJsonFragment(['price' => $tourPrice]);
     }
 
     public function test_tours_list_returns_pagination(): void
@@ -88,7 +102,7 @@ class ToursListTest extends TestCase
             'ending_date' => now()->addDays(1),
         ]);
 
-        $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours?sortBy=price&sortOrder=asc');
+        $response = $this->get('/api/v1/travels/' . $travel->slug . '/tours?sortBy=price&sortOrder=asc');
 
         $response->assertStatus(200);
         $response->assertJsonPath('data.0.id', $cheapEarlierTour->id);
