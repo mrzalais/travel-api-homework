@@ -21,6 +21,7 @@ use Illuminate\Support\Carbon;
  * @property int $price
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
  * @method static Builder|Tour newModelQuery()
  * @method static Builder|Tour newQuery()
  * @method static Builder|Tour query()
@@ -32,6 +33,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Tour whereStartingDate($value)
  * @method static Builder|Tour whereTravelId($value)
  * @method static Builder|Tour whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class Tour extends Model

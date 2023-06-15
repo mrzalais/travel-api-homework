@@ -29,6 +29,7 @@ class CreateUserCommand extends Command
 
     /**
      * Execute the console command.
+     *
      * @throws Throwable
      */
     public function handle(): int
@@ -48,7 +49,7 @@ class CreateUserCommand extends Command
 
         $validator = Validator::make($user, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'max:255', 'email', 'unique:' . User::class],
+            'email' => ['required', 'string', 'max:255', 'email', 'unique:'.User::class],
             'password' => ['required', Password::defaults()],
         ]);
 
@@ -66,8 +67,7 @@ class CreateUserCommand extends Command
             $newUser->roles()->attach($role->id);
         });
 
-
-        $this->info('User ' . $user['email'] . ' created successfully');
+        $this->info('User '.$user['email'].' created successfully');
 
         return 0;
     }

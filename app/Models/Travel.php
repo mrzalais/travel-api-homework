@@ -27,6 +27,7 @@ use Illuminate\Support\Carbon;
  * @property-read Collection<int, Tour> $tours
  * @property-read int|null $tours_count
  * @property-read int $number_of_nights
+ *
  * @method static Builder|Travel findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static Builder|Travel newModelQuery()
  * @method static Builder|Travel newQuery()
@@ -40,6 +41,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Travel whereSlug($value)
  * @method static Builder|Travel whereUpdatedAt($value)
  * @method static Builder|Travel withUniqueSlugConstraints(Model $model, string $attribute, array $config, string $slug)
+ *
  * @mixin Eloquent
  */
 class Travel extends Model
@@ -62,8 +64,8 @@ class Travel extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
-            ]
+                'source' => 'name',
+            ],
         ];
     }
 

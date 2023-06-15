@@ -16,6 +16,7 @@ use Illuminate\Support\Carbon;
  * @property string $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
  * @method static Builder|Role newModelQuery()
  * @method static Builder|Role newQuery()
  * @method static Builder|Role query()
@@ -23,6 +24,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Role whereId($value)
  * @method static Builder|Role whereName($value)
  * @method static Builder|Role whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class Role extends Model

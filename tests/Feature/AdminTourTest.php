@@ -14,7 +14,7 @@ class AdminTourTest extends TestCase
     {
         /** @var Travel $travel */
         $travel = Travel::factory()->create();
-        $response = $this->postJson('/api/v1/admin/travels/' . $travel->id . '/tours');
+        $response = $this->postJson('/api/v1/admin/travels/'.$travel->id.'/tours');
 
         $response->assertStatus(401);
     }
@@ -27,7 +27,7 @@ class AdminTourTest extends TestCase
         $user->roles()->attach(Role::where('name', 'editor')->value('id'));
         /** @var Travel $travel */
         $travel = Travel::factory()->create();
-        $response = $this->actingAs($user)->postJson('/api/v1/admin/travels/' . $travel->id . '/tours');
+        $response = $this->actingAs($user)->postJson('/api/v1/admin/travels/'.$travel->id.'/tours');
 
         $response->assertStatus(403);
     }
@@ -41,12 +41,12 @@ class AdminTourTest extends TestCase
         /** @var Travel $travel */
         $travel = Travel::factory()->create();
 
-        $response = $this->actingAs($user)->postJson('/api/v1/admin/travels/' . $travel->id . '/tours', [
+        $response = $this->actingAs($user)->postJson('/api/v1/admin/travels/'.$travel->id.'/tours', [
             'name' => 'Tour name',
         ]);
         $response->assertStatus(422);
 
-        $response = $this->actingAs($user)->postJson('/api/v1/admin/travels/' . $travel->id . '/tours', [
+        $response = $this->actingAs($user)->postJson('/api/v1/admin/travels/'.$travel->id.'/tours', [
             'name' => 'Tour name',
             'starting_date' => now()->toDateString(),
             'ending_date' => now()->addDay()->toDateString(),

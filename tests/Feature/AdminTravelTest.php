@@ -51,7 +51,6 @@ class AdminTravelTest extends TestCase
         $response->assertStatus(201);
     }
 
-
     public function test_updates_travel_successfully_with_valid_data(): void
     {
         $this->seed(RoleSeeder::class);
@@ -61,12 +60,12 @@ class AdminTravelTest extends TestCase
         /** @var Travel $travel */
         $travel = Travel::factory()->create();
 
-        $response = $this->actingAs($user)->putJson('/api/v1/admin/travels/' . $travel->id, [
+        $response = $this->actingAs($user)->putJson('/api/v1/admin/travels/'.$travel->id, [
             'name' => 'Travel name',
         ]);
         $response->assertStatus(422);
 
-        $response = $this->actingAs($user)->putJson('/api/v1/admin/travels/' . $travel->id, [
+        $response = $this->actingAs($user)->putJson('/api/v1/admin/travels/'.$travel->id, [
             'name' => 'Travel name updated',
             'is_public' => 1,
             'description' => 'Some description',
